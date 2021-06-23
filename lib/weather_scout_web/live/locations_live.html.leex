@@ -1,0 +1,32 @@
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+  <%= for location <- @locations do %>
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+      <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
+        <p class="text-gray-900 text-xl font-bold"><%= location.name %></p>
+      </div>
+      <div class="px-4 py-5 sm:p-6">
+            <div class="mb-4">
+              <p class="text-gray-700 text-base">Lat <%= Float.round(location.latitude, 4) %>, Long <%= Float.round(location.longitude, 4) %></p>
+              <p class="text-gray-700 text-base">Elevation: <%= number_to_delimited(Float.round(location.elevation, 0), 0) %> ft</p>
+            </div>
+            <div>
+              <p class="text-gray-700 text-base">Closest Weather Station:</p>
+              <p class="text-gray-700 text-base">
+                <%= location.station.name %>
+              </p>
+            </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <span><%= link "See on Map", to: Routes.weather_path(@socket, :index, id: location.id), class: "text-indigo-600 hover:text-indigo-900" %></span>
+              </div>
+              <div class="leading-5">
+                <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: location.id, data: [confirm: "Are you sure?"], class: "pl-6 text-indigo-600 hover:text-indigo-900" %></span>
+              </div>
+            </div>
+      </div>
+    </div>
+  <% end %>
+</div>

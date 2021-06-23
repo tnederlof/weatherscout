@@ -1,0 +1,87 @@
+<div class="py-12 bg-white">
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:text-center">
+      <p class="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">The Weather Scout</p>
+      <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+        Explore the weather
+      </h3>
+      <p class="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
+        Click around on the map or use the search tool to find a destination that interests you, then give it a name and save for future access.
+      </p>
+    </div>
+
+    <div class="mt-10">
+      <ul class="md:grid md:grid-cols-2 md:col-gap-8 md:row-gap-10">
+        <li>
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Data from thousands of stations</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                From the <%= link "Explore Weather", to: Routes.weather_path(@conn, :index), class: "text-base leading-6 font-semibold text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150"%> tab search anywhere in the United States and explore data provided by thousands of weather stations reported to NOAA.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="mt-10 md:mt-0">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Save and name locations</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                By default each location clicked/searched is given a default name consisting of the coordinates. You can rename and save a location to later access on the <%= link "My Locations", to: Routes.locations_path(@conn, :index), class: "text-base leading-6 font-semibold text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150" %> tab.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="mt-10 md:mt-0">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Interactive charts</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                From the <%= link "Explore Weather", to: Routes.weather_path(@conn, :index), class: "text-base leading-6 font-semibold text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150"%> tab the right pane has interactive graphs that show additional data on hover. Click the download icon in the upper right corner to save the data.
+              </p>
+            </div>
+          </div>
+
+        </li>
+        <li class="mt-10 md:mt-0">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Advanced details</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                In the <%= link "Explore Weather", to: Routes.weather_path(@conn, :index), class: "text-base leading-6 font-semibold text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150"%> tab change the view to Detailed to get more detailed weather and elevation data. The dotted lines show 90% of the temperature ranges over the past 30 years.
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

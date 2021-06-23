@@ -1,0 +1,52 @@
+
+<div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+    <div>
+      <div class="mt-8">
+        <div>
+          <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
+          <%= if @password_changeset.action do %>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+              <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+          <% end %>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Change password
+          </h3>
+        </div>
+        <div class="mt-6 grid grid-cols-1 row-gap-6 col-gap-4 sm:grid-cols-6">
+          <div class="sm:col-span-4">
+            <%= label f, :current_password, for: "current_password_for_password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= error_tag f, :current_password %>
+            </div>
+          </div>
+
+
+          <div class="sm:col-span-4">
+            <%= label f, :password, "New password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :password, required: true, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= error_tag f, :password %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4">
+            <%= label f, :password_confirmation, "Confirm new password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <div class="mt-1 rounded-md shadow-sm">
+              <%= password_input f, :password_confirmation, required: true, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= error_tag f, :password_confirmation %>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 pt-3">
+          <div class="flex justify-start">
+            <span class="inline-flex rounded-md shadow-sm">
+              <%= submit "Change password", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+</div>

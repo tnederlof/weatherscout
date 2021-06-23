@@ -1,0 +1,80 @@
+<div class="bg-white">
+  <div class="max-w-screen-xl mx-auto pt-12 pb-16 sm:pt-16 sm:pb-20 px-4 sm:px-6 lg:pt-20 lg:pb-28 lg:px-8">
+    <h2 class="text-3xl leading-9 font-extrabold text-gray-900">
+      About The Weather Scout
+    </h2>
+    <div class="mt-6 border-t-2 border-gray-100 pt-10">
+      <dl class="md:grid md:grid-cols-2 md:gap-8">
+        <div>
+          <div>
+            <dt class="text-lg leading-6 font-medium text-gray-900">
+              Why does this site exist?
+            </dt>
+            <dd class="mt-2">
+              <p class="text-base leading-6 text-gray-500">
+                Historical weather data is plentiful especially in the United States but most of it is difficult to access. This challenging access prevents data exploration and makes trip planning difficult.
+              </p>
+            </dd>
+          </div>
+          <div class="mt-12">
+            <dt class="text-lg leading-6 font-medium text-gray-900">
+              Who made this site?
+            </dt>
+            <dd class="mt-2">
+              <p class="text-base leading-6 text-gray-500">
+                My name is Trevor Nederlof. I happen to love backpacking, data science and web development. Finding the likely weather for a new location was always a challenge so this site was born. This helps me plan trips better and I hope it will be helpful for you as well.
+              </p>
+            </dd>
+          </div>
+          <div class="mt-12">
+            <dt class="text-lg leading-6 font-medium text-gray-900">
+              Where did the data come from?
+            </dt>
+            <dd class="mt-2">
+              <p class="text-base leading-6 text-gray-500">
+                Every ten years NOAA creates an incredible climate data set based on the past 30 years of historical data
+                (<a href="https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets/climate-normals/1981-2010-normals-data" class="text-base leading-6 font-semibold text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">NOAA site for more details</a>). This study provides historical data on temperature, wind, precipitation and more.
+              </p>
+              <p class="pt-2 text-base leading-6 text-gray-500">
+                Citation: Anthony Arguez, Imke Durre, Scott Applequist, Mike Squires, Russell Vose, Xungang Yin, and Rocky Bilotta (2010). NOAA's U.S. Climate Normals (1981-2010). Temperature data. NOAA National Centers for Environmental Information. DOI:10.7289/V5PN93JP May 3, 2020.
+              </p>
+            </dd>
+          </div>
+        </div>
+        <div class="mt-12 md:mt-0">
+          <div>
+            <dt class="text-lg leading-6 font-medium text-gray-900">
+              What does this site do?
+            </dt>
+            <dd class="mt-2">
+              <p class="text-base leading-6 text-gray-500">
+                We combine detailed historical weather data with a powerful interactive map and location search tool. This tool provides an easy to use method of historical weather exploration all over the United States.
+              </p>
+            </dd>
+          </div>
+          <div class="mt-12">
+            <dt class="text-lg leading-6 font-medium text-gray-900">
+              How can I use this site?
+            </dt>
+            <dd class="mt-2">
+              <p class="text-base leading-6 text-gray-500">
+                On the Explore Weather tab you can either click on the map or enter in the search field to select a location, the estimated temperature ranges for each day will be displayed. This is useful when planning a trip to a new place so you know what gear to bring.
+              </p>
+            </dd>
+          </div>
+          <div class="mt-12">
+            <dt class="text-lg leading-6 font-medium text-gray-900">
+              Where can I submit a bug or a feature request?
+            </dt>
+            <dd class="mt-2">
+              <p class="text-base leading-6 text-gray-500">
+              <a href="https://forms.gle/VKpGV2jtxrjGoCb89" class="text-base leading-6 font-semibold text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">Submit Here</a><br>
+                I would greatly appreciate bug reports as it will improve the experience of future users. Feature requests will go into a queue and hopefully be implemented but no promises as this is a hobby of mine.
+              </p>
+            </dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

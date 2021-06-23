@@ -1,0 +1,53 @@
+<div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+      Create an account
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <%= form_for @changeset, Routes.user_registration_path(@conn, :create), fn f -> %>
+        <%= if @changeset.action do %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            <p>Oops, something went wrong! Please check the errors below.</p>
+          </div>
+        <% end %>
+
+        <%= label f, :email, "Email", class: "block text-sm font-medium leading-5 text-gray-700" %>
+        <div class="mt-1 rounded-md shadow-sm">
+          <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+          <%= error_tag f, :email %>
+        </div>
+
+        <%= label f, :password, "Password", class: "block text-sm font-medium leading-5 text-gray-700" %>
+        <div class="mt-1 rounded-md shadow-sm">
+          <%= password_input f, :password, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+          <%= error_tag f, :password %>
+        </div>
+
+            <div class="text-sm leading-5 mt-6">
+              <p class="font-medium text-gray-700">You will need to confirm your email address in order to use the explore weather features of this website.</p>
+              <p class="font-medium text-gray-700 mt-2">By clicking Signup below you agree with the storage and handling of your data in accordance with our <%= link "Privacy Policy", to: Routes.privacy_path(@conn, :index), class: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>.</p>
+            </div>
+
+          <div class="mt-6">
+            <span class="block w-full rounded-md shadow-sm">
+              <%= submit "Signup", class: "w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+            </span>
+          </div>
+
+          <div class="mt-6 flex items-center justify-between">
+            <div class="text-sm leading-5">
+              <%= link "Login", to: Routes.user_session_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+            </div>
+
+            <div class="text-sm leading-5">
+              <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+            </div>
+          </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

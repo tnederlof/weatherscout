@@ -1,0 +1,165 @@
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+  <div class="flex flex-wrap">
+    <div class="w-full lg:w-2/3 xl:w-2/3 h-auto">
+        <div id="WeatherMap"
+          class="mapboxgl-map"
+          phx-hook="WeatherMap"
+          data-selected_location="<%= Poison.encode!(@selected_location) %>"
+          phx-update="ignore">
+        </div>
+    </div>
+    <div class="w-full lg:w-1/3 xl:w-1/3 h-auto lg:pl-8 xl:pl-8">
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
+          <%= if @edit_mode do %>
+            <div class="flex items-center">
+                <%= form_for @changeset, "#", [phx_submit: "save_name"], fn f -> %>
+                <p class="block text-sm leading-5 font-medium text-gray-700">
+                  Location Name
+                </p>
+                  <div class="sm:flex sm:items-center">
+                    <div class="max-w-xs w-full">
+                      <div class="relative rounded-md shadow-sm">
+                        <%= text_input f, :name, class: "mt-1 form-input block w-full sm:text-sm sm:leading-5" %>
+                      </div>
+                    </div>
+                    <span class="mt-3 inline-flex rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:w-auto">
+                      <%= submit "Change", phx_disable_with: "Changing...", class: "w-full inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 sm:w-auto sm:text-sm sm:leading-5" %>
+                    </span>
+                    <div class="ml-4 flex-shrink-0 flex">
+                      <button phx-click="exit_edit_mode" class="inline-flex text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
+                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="sm:flex sm:items-center">
+                    <%= error_tag f, :user_id, "invalid-feedback-location-name" %>
+                  </div>
+                <% end %>
+              </div>
+              <% else %>
+                <p class="block text-sm leading-5 font-medium text-gray-900">
+                  Location Name
+                </p>
+              <div class="flex items-center">
+                <div class="w-0 flex-1 flex justify-between">
+                  <%= if (@selected_location != []) and @selected_location.user_save do %>
+                    <p phx-click="edit_location_name" class="w-0 flex-1 text-base leading-5 font-medium text-gray-900">
+                      <%= location_name_readable(@selected_location) %>
+                    </p>
+                  <% else %>
+                    <p phx-click="edit_location_name" class="w-0 flex-1 text-base leading-5 font-medium text-gray-400">
+                      <%= location_name_readable(@selected_location) %>
+                    </p>
+                  <% end %>
+                </div>
+                <div class="ml-2 flex-shrink-0 flex">
+                  <button phx-click="edit_location_name" class="inline-flex text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
+                    <img class="h-6 w-6" src="<%= Routes.static_path(@socket, "/images/edit_icon.svg") %>" alt="Edit Name" />
+                  </button>
+                </div>
+              </div>
+          <% end %>
+          <%= if (@selected_location != []) and @selected_location.user_save do %>
+            <form phx-submit="unsave_location">
+              <span class="mt-3 inline-flex rounded-md shadow-sm">
+                <button class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 sm:w-auto sm:text-sm sm:leading-5">
+                  Delete
+                </button>
+              </span>
+            </form>
+          <% else %>
+            <form phx-submit="save_location">
+              <span class="mt-3 inline-flex rounded-md shadow-sm">
+                <button class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 sm:w-auto sm:text-sm sm:leading-5">
+                  Save
+                </button>
+              </span>
+            </form>
+          <% end %>
+
+        </div>
+        <div class="px-4 pt-4 sm:px-6">
+          <form phx-submit="menu_submit" phx-change="menu_change">
+            <label for="menu_choice" class="block text-sm leading-5 font-medium text-gray-700">View</label>
+            <select id="menu_choice", name = "menu_choice",
+              class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+            />
+            <%= if @menu_choice == "summary_historical" do %>
+              <option value="summary_historical" selected>Summary</option>
+              <option value="detailed_temp_historical">Detailed Temperature</option>
+              <option value="detailed_precip_historical">Detailed Precipitation</option>
+            <% else %>
+              <%= if @menu_choice == "detailed_temp_historical" do %>
+                <option value="summary_historical">Summary</option>
+                <option value="detailed_temp_historical" selected>Detailed Temperature</option>
+                <option value="detailed_precip_historical">Detailed Precipitation</option>
+              <% else %>
+                <option value="summary_historical">Summary</option>
+                <option value="detailed_temp_historical">Detailed Temperature</option>
+                <option value="detailed_precip_historical" selected>Detailed Precipitation</option>
+              <% end %>
+            <% end %>
+            </select>
+          </form>
+        </div>
+        <%= if @menu_choice == "summary_historical" do %>
+          <div class="px-4 py-5 sm:p-6">
+            <div id="SummaryChart"
+                phx-hook="SummaryChart"
+                data-selected_location="<%= Poison.encode!(@selected_location) %>"
+                phx-update="ignore">
+            </div>
+            <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+              <%= if @selected_location != [] do %>
+              Location at an elevation of <%= number_to_delimited(Float.round(@selected_location.elevation, 0)) %>ft
+              <% end %>
+            </p>
+            <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+              Weather data is from the closest station and is adjusted based on the elevation.
+            </p>
+          </div>
+        <% else %>
+          <%= if (@menu_choice == "detailed_temp_historical") do %>
+            <div class="px-4 py-5 sm:p-6">
+              <div id="DetailedChart"
+                  phx-hook="DetailedChart"
+                  data-selected_location="<%= Poison.encode!(@selected_location) %>"
+                  phx-update="ignore">
+              </div>
+              <%= if @selected_location != [] do %>
+                <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+                  Location at an elevation of <%= number_to_delimited(Float.round(@selected_location.elevation, 0)) %>ft
+                (<%= number_to_delimited(abs(Float.round(calc_elevation_diff(@selected_location), 0))) %>ft <%= if calc_elevation_diff(@selected_location) > 0, do: "higher", else: "lower" %> than the station).
+                The temperatures have been <%= if calc_elevation_diff(@selected_location) > 0, do: "lowered", else: "raised" %> by <%= abs(Float.round(calc_temperature_diff(@selected_location), 1)) %>°F.
+                </p>
+              <% end %>
+              <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+                Weather data is from the closest station and is adjusted based on the elevation.
+              </p>
+            </div>
+          <% else %>
+            <div class="px-4 py-5 sm:p-6">
+              <div id="DetailedPrecipChart"
+                  phx-hook="DetailedPrecipChart"
+                  data-selected_location="<%= Poison.encode!(@selected_location) %>"
+                  phx-update="ignore">
+              </div>
+              <%= if @selected_location != [] do %>
+                <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+                  Location at an elevation of <%= number_to_delimited(Float.round(@selected_location.elevation, 0)) %>ft
+                (<%= number_to_delimited(abs(Float.round(calc_elevation_diff(@selected_location), 0))) %>ft <%= if calc_elevation_diff(@selected_location) > 0, do: "higher", else: "lower" %> than the station).
+                </p>
+              <% end %>
+              <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+                % Precip shows the percent of days with some precipitation with smoothing applied. High = 75th Percentile, Avg = 50th Percentile, Low = 25th Percentile.
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

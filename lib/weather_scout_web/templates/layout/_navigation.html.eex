@@ -1,0 +1,87 @@
+<nav class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <div x-data="{ tab: ''}" class="flex-shrink-0 flex items-center">
+               <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
+                The Weather Scout <span class="text-xl font-normal text-indigo-600">(beta)</span>
+              </h2>
+          </div>
+        </div>
+        <div class="hidden sm:ml-2 sm:flex sm:items-center">
+          <%= if @current_user do %>
+            <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+              <%= link "Explore Weather", to: Routes.weather_path(@conn, :index), class: css_class(@conn, Routes.weather_path(@conn, :index), "") %>
+              <%= link "My Locations", to: Routes.locations_path(@conn, :index), class: css_class(@conn, Routes.locations_path(@conn, :index), "ml-8 ") %>
+              <%= link "How It Works", to: Routes.how_path(@conn, :index), class: css_class(@conn, Routes.how_path(@conn, :index), "ml-8 ") %>
+              <%= link "About", to: Routes.about_path(@conn, :index), class: css_class(@conn, Routes.about_path(@conn, :index), "ml-8 ") %>
+            </div>
+          <% else %>
+            <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+              <%= link "How It Works", to: Routes.how_path(@conn, :index), class: css_class(@conn, Routes.how_path(@conn, :index), "") %>
+              <%= link "About", to: Routes.about_path(@conn, :index), class: css_class(@conn, Routes.about_path(@conn, :index), "ml-8 ") %>
+            </div>
+          <% end %>
+          <!-- Profile dropdown -->
+          <div class="ml-10 mt-1 relative" x-data="{ open: false }"  @keydown.escape="open = false" @click.away="open = false">
+            <div>
+              <button @click="open = !open" class="focus:outline-none" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                <svg class="h-6 w-6 rounded-full" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </button>
+            </div>
+
+
+            <%= if @current_user do %>
+              <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+                <div class="py-1 rounded-md bg-white shadow-xs">
+                  <%= link "User Settings", to: Routes.user_settings_path(@conn, :edit), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link "Logout", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                </div>
+              </div>
+              <% else %>
+              <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+                <div class="py-1 rounded-md bg-white shadow-xs">
+                  <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link "Login", to: Routes.user_session_path(@conn, :new), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden" x-data="{ mobileOpen: false }"  @keydown.escape="mobileOpen = false" @click.away="mobileOpen = false">
+          <!-- Mobile menu button -->
+          <button @click="mobileOpen = !mobileOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white">
+            <!-- Menu open: "hidden", Menu closed: "block" -->
+            <svg x-show="!mobileOpen" class="hidden h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <!-- Menu open: "block", Menu closed: "hidden" -->
+            <svg x-show="mobileOpen" class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div x-show="!mobileOpen" class="md:hidden">
+      <%= if @current_user do %>
+        <div class="px-2 pt-2 pb-3 sm:px-3 border-b border-gray-700">
+          <%= link "Explore Weather", to: Routes.weather_path(@conn, :index), class: mobile_css_class(@conn, Routes.weather_path(@conn, :index), "") %>
+          <%= link "My Locations", to: Routes.locations_path(@conn, :index), class: mobile_css_class(@conn, Routes.locations_path(@conn, :index), "mt-1 ") %>
+          <%= link "How It Works", to: Routes.how_path(@conn, :index), class: mobile_css_class(@conn, Routes.how_path(@conn, :index), "mt-1 ") %>
+          <%= link "About", to: Routes.about_path(@conn, :index), class: mobile_css_class(@conn, Routes.about_path(@conn, :index), "mt-1 ") %>
+          <%= link "User Settings", to: Routes.user_settings_path(@conn, :edit), class: mobile_css_class(@conn, Routes.user_settings_path(@conn, :edit), "mt-1 ") %>
+          <%= link "Logout", to: Routes.user_session_path(@conn, :delete), method: :delete, class: mobile_css_class(@conn, Routes.user_session_path(@conn, :delete), "mt-1 ") %>
+        </div>
+      <% else %>
+        <div class="px-2 pt-2 pb-3 sm:px-3">
+          <%= link "How It Works", to: Routes.how_path(@conn, :index), class: mobile_css_class(@conn, Routes.how_path(@conn, :index), "") %>
+          <%= link "About", to: Routes.about_path(@conn, :index), class: mobile_css_class(@conn, Routes.about_path(@conn, :index), "mt-1 ") %>
+          <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: mobile_css_class(@conn, Routes.user_registration_path(@conn, :new), "mt-1 ") %>
+          <%= link "Login", to: Routes.user_session_path(@conn, :new), class: mobile_css_class(@conn, Routes.user_session_path(@conn, :new), "mt-1 ") %>
+        </div>
+      <% end %>
+    </div>
+  </nav>

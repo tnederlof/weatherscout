@@ -1,0 +1,8 @@
+<div>
+  <h2>Welcome to The Weather Scout</h2>
+  <p>You can confirm your account by visiting the url below:</p>
+  <br>
+  <p><%= @url %></p>
+  <br>
+  <p>If you didn't create an account with us, please ignore this.</p>
+</div>
