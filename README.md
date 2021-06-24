@@ -9,7 +9,7 @@ This repo contains the following components:
 * Backend code - Elixir code using the Phoenix web framework
 * Database seeds - Example data seed files for development
 
-See can see the code in action at: [https://www.theweatherscout.com]. To deploy this code some API Keys are required and a PostgreSQL databased must be configured and loaded with NOAA normals weather data.
+See can see the code in action at: https://www.theweatherscout.com. To deploy this code some API Keys are required and a PostgreSQL databased must be configured and loaded with NOAA normals weather data.
 
 Note: The data used in this site is based on historical weather data and is NOT a prediction of future weather patterns, please check a short-term forcast at weather.gov before heading out on a trip.   
 
@@ -20,7 +20,7 @@ Every ten years NOAA creates a [climate dataset](https://www.ncdc.noaa.gov/data-
 ## Configuration
 
 Three API keys will need to be registered as described below:
-* [Mapbox API] (https://docs.mapbox.com/help/getting-started/access-tokens/) for location searches and map rendering
+* [Mapbox API](https://docs.mapbox.com/help/getting-started/access-tokens/) for location searches and map rendering
 * [SendGrid API](https://sendgrid.com/solutions/email-api/) for user signup and password reset email sending
 * [Bing Maps API](https://www.microsoft.com/en-us/maps/create-a-bing-maps-key) for elevation data
 
