@@ -40,7 +40,15 @@ config :virtual_earth_elevation,
   api_key: "BINGMAPSAPIKEYGOESHERE"
 ```
 
-In addition you will need to set your secret key base in the `config.exs` file.
+You will need to set the Mapbox API Token in the [frontend code here](https://github.com/tnederlof/weatherscout/blob/main/assets/js/mapbox/mapboxgl.js#L9).
+
+You will need to set your secret key base in the `config.exs` file.
+
+You will need to set the following environment variables in the production environment.
+* DATABASE_URL
+* SECRET_KEY_BASE
+
+There are many different ways to host a Phoenix application but my recommendation is to use [Render.com](https://render.com/docs/deploy-phoenix).
 
 There are seed data files to create a sample database included in this repo. The full NOAA climate normals dataset is quite large. You can access the data via their [ftp site here](ftp://ftp.ncdc.noaa.gov/pub/data/normals/1981-2010/).
 
